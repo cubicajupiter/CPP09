@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/22 14:33:54 by jvalkama          #+#    #+#             */
+/*   Updated: 2026/04/22 17:22:31 by jvalkama         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 /*
 Ex00: Bitcoin Exchange
 Core concepts:
@@ -22,3 +34,46 @@ String-to-number conversion (std::stof, std::stod, or std::strtod for robust err
 📖 https://en.cppreference.com/w/cpp/string/basic_string/stof
 
 */
+
+#include "BitcoinExchange.hpp"
+#include <iostream>
+#include <fstream>
+#include <sstream>
+
+static std::string	fileOperation(char *file_name);
+static void			errorExit(std::string msg);
+
+int	main(int ac, char **av) {
+	if (ac == 2) {
+		std::string		file_rawdata;
+		file_rawdata = fileOperation(av[1]);
+		
+		BitcoinExchange		btc_op(file_rawdata);
+
+	}
+	else
+		errorExit("Error: No input file argument!\nUsage: ./btc [file name]");
+	return 0;
+}
+
+static std::string	fileOperation(char *file_name) {
+	std::ifstream		instream;
+	std::ostringstream  buffer;
+
+	instream.open(file_name);
+	if (!instream.is_open()) {
+		errorExit("Error: File access failure!");
+	}
+	buffer << instream.rdbuf();
+	if (!buffer) {
+		if (errno = 0)
+			errorExit("Error: File is empty!");
+		errorExit("Error: File access failure!");
+	}
+	return buffer.str();
+}
+
+static void	errorExit(std::string msg) {
+	std::cout << msg << std::endl;
+	exit(1);
+}
