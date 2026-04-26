@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 14:34:09 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/04/25 17:01:24 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/04/26 13:57:26 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int	RPN::evaluate(std::string_view rpn) {
 	if (inputValidation(rpn) == false) {
-		throw std::invalid_argument("Faulty RPN format passed as argument!\n");
+		throw std::invalid_argument("\nError: Faulty RPN format passed as argument!\n\n");
 	}
 	return tokenEvaluation(rpn);
 }
@@ -31,31 +31,46 @@ bool	RPN::inputValidation(std::string_view rpn) {
 }
 
 int	RPN::tokenEvaluation(std::string_view rpn) {
-	size_t	size;
+	size_t		size;
+	int			result;
+	int			top;
 
 	size = rpn.size();
 	for (size_t i = 0; i < size; ++i) {
 		switch (rpn[i]) {
 			case ' ': case '\t': case '\n': case '\r': case '\f': case '\v':
 				break;
-			case '+':
-				//top OR pop values  and push result
+			case '+':	
+				top = operands_.top();
+				operands_.pop();
+				operands_.top() += top;
 				break;
 			case '-':
-				//top is subtracted from the one below,  and push result
+				top = operands_.top();
+				operands_.pop();
+				operands_.top() -= top;
 				break;
 			case '*':
-				//top OR pop values  and push result
+				top = operands_.top();
+				operands_.pop();
+				operands_.top() *= top;
 				break;
 			case '/':
-				//top is the divider, below is dividend.  and push result
+				top = operands_.top();
+				operands_.pop();
+				operands_.top() /= top;
 				break;
 			default:
-				operands_.push(rpn[i]);
+				operands_.push(rpn[i] - '0');
 				break;
 		}
 	}
-	// erase/zero-out stack.
-	
-	// and return value directly
+	if (operands_.size() != 1) {
+		operands_ = std::stack<int>();
+		throw std::invalid_argument("\nError: Faulty RPN format passed as argument!\n"
+			"Only numbers between 0 to 9, and the operators + - * / are allowed.\n\n");
+	}
+	result = operands_.top();
+	operands_.pop();
+	return result;
 }

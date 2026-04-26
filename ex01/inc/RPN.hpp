@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 14:34:03 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/04/25 17:01:28 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/04/26 13:29:53 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 class RPN {
 	private:
-		static std::stack<int>		operands_;
+		static inline std::stack<int>		operands_;
 
 		RPN() = delete;
 		RPN(const RPN& other) = delete;
