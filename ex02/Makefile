@@ -6,7 +6,7 @@
 #    By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/18 12:06:00 by jvalkama          #+#    #+#              #
-#    Updated: 2026/04/07 15:29:37 by jvalkama         ###   ########.fr        #
+#    Updated: 2026/04/27 18:36:30 by jvalkama         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,14 +14,14 @@ NAME			:=PmergeMe
 
 SRCDIR			:=src
 VPATH			:=$(SRCDIR)
-SRCS			:=main.cpp
+SRCS			:=main.cpp PmergeMe.cpp
 
 OBJDIR			:=obj
 OBJS			:=$(addprefix $(OBJDIR)/, $(SRCS:.cpp=.o))
 
 INC			:=inc
 INCLUDES		:=-I $(INC)
-HEADER			:=$(INC)/
+HEADER			:=$(INC)/PmergeMe.hpp
 
 COMPILER		:=c++
 CXXFLAGS		:=-Wall -Wextra -Werror -std=c++20

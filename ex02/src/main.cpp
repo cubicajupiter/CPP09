@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 14:34:17 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/04/22 14:34:17 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/04/27 18:36:29 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,3 +37,7 @@ std::chrono — for measuring and displaying sort time per container
 
 The hardest part of the module is Ex02 — spend most of your research time understanding the Ford-Johnson algorithm and Jacobsthal sequence before writing any code. Good luck!
 */
+
+int	main(int ac, char** av) {
+	return 0;
+}
