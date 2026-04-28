@@ -6,38 +6,41 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 14:34:17 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/04/27 18:36:29 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/04/28 11:26:25 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-Ex02: PmergeMe
-Core concepts:
-
-Ford-Johnson (merge-insertion sort) algorithm — understand it before coding
-
+Ford-Johnson (merge-insertion sort) algorithm
 📖 https://en.wikipedia.org/wiki/Merge-insertion_sort
 📖 Helpful community breakdown: https://github.com/PunkChameleon/ford-johnson-merge-insertion-sort
 
 
-std::vector and std::deque — the two containers to implement the sort on separately
-
+std::vector and std::deque
 📖 https://en.cppreference.com/w/cpp/container/vector
 📖 https://en.cppreference.com/w/cpp/container/deque
 
 
-Jacobsthal numbers — used to determine the optimal insertion order in Ford-Johnson
-
+Jacobsthal numbers
 📖 https://en.wikipedia.org/wiki/Jacobsthal_number
 
 
-std::chrono — for measuring and displaying sort time per container
-
+std::chrono
 📖 https://en.cppreference.com/w/cpp/chrono
-
-The hardest part of the module is Ex02 — spend most of your research time understanding the Ford-Johnson algorithm and Jacobsthal sequence before writing any code. Good luck!
 */
 
+#include "PmergeMe.hpp"
+#include <chrono>
+#include <iostream>
+
 int	main(int ac, char** av) {
+	if (ac > 1) {
+		const auto	start = std::chrono::steady_clock::now();
+		
+		PmergeMe::fordJohnson();
+
+		const auto	end = std::chrono::steady_clock::now();
+		const auto	duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+	}
 	return 0;
 }
