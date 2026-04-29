@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 14:34:14 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/04/28 11:26:24 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/04/29 16:24:12 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,8 @@ class PmergeMe {
 		~PmergeMe() = delete;
 		PmergeMe&	operator=(const PmergeMe& other) = delete;
 	public:
-		void	fordJohnson();
+		void				vectorFordJohnson();
+		void				dequeFordJohnson();
+		std::vector<int>&	argToVec(int ac, char** av);
+		std::deque<int>&	argToDeq(int ac, char** av);
 };
