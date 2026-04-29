@@ -6,7 +6,7 @@
 #    By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/18 12:06:00 by jvalkama          #+#    #+#              #
-#    Updated: 2026/04/07 15:29:37 by jvalkama         ###   ########.fr        #
+#    Updated: 2026/04/26 14:01:17 by jvalkama         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,19 +14,19 @@ NAME			:=RPN
 
 SRCDIR			:=src
 VPATH			:=$(SRCDIR)
-SRCS			:=main.cpp
+SRCS			:=main.cpp RPN.cpp
 
 OBJDIR			:=obj
 OBJS			:=$(addprefix $(OBJDIR)/, $(SRCS:.cpp=.o))
 
-INC			:=inc
+INC				:=inc
 INCLUDES		:=-I $(INC)
-HEADER			:=$(INC)/
+HEADER			:=$(INC)/RPN.hpp
 
 COMPILER		:=c++
 CXXFLAGS		:=-Wall -Wextra -Werror -std=c++20
 
-RM			:=rm -f
+RM				:=rm -f
 
 
 all:			$(NAME)
