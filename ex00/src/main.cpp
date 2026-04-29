@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 14:33:54 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/04/22 17:22:31 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/04/23 13:34:53 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,3 +77,17 @@ static void	errorExit(std::string msg) {
 	std::cout << msg << std::endl;
 	exit(1);
 }
+
+/*
+C++ PARSING APPROACHES:
+
+	!!!extraction >> from std::istream object!!!
+	`file >> buffer;`
+	automatically skips leading whitespace AND treats whitespace as delimiter.
+	Not great support for custom delimiters.. stops reading at whitespace
+	Input formatted according to type of buffer: 
+	interprets characters as representations of a type of value: for `int buffer` it extracts integers.
+
+	std::getline & std::stringstream
+	supports custom delimiters
+	*/

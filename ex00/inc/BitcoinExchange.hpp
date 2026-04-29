@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 14:33:47 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/04/22 17:22:31 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/04/23 13:34:52 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 class BitcoinExchange {
 	private:
-		std::map<std::string, float>		exchange_rates;
+		std::map<std::string, float>	exchange_rates_;
+		std::map<std::string, float>	values_;
 	public:
 		BitcoinExchange();
 		BitcoinExchange(std::string input);
