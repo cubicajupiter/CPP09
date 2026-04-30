@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 14:34:19 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/04/29 16:24:05 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/04/30 15:40:14 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,29 @@
 #include <charconv>
 #include <deque>
 #include <vector>
+#include <cstring>
 
-std::vector<long long>&	jacobsthalNumbers(int len) {
+//ORTHODOX CANONICAL CLASS FORM--------------------
+template <typename ContCont, typename Cont>
+PmergeMe<ContCont, Cont>::PmergeMe() {}
+
+template <typename ContCont, typename Cont>
+PmergeMe<ContCont, Cont>::PmergeMe(char** argv) {}
+
+template <typename ContCont, typename Cont>
+PmergeMe<ContCont, Cont>::PmergeMe(const PmergeMe& other) {}
+
+template <typename ContCont, typename Cont>
+PmergeMe<ContCont, Cont>::~PmergeMe() {}
+
+template <typename ContCont, typename Cont>
+PmergeMe<ContCont, Cont>&	PmergeMe<ContCont, Cont>::operator=(const PmergeMe& other) {}
+//-------------------------------------------------
+
+
+//JACOBSTHAL METHODS---------------------------------------------
+template <typename ContCont, typename Cont>
+std::vector<long long>&	PmergeMe<ContCont, Cont>::jacobsthalNumbers(int len) {
 	std::vector<long long>	jnums;
 	size_t	i = 2;
 
@@ -30,35 +51,41 @@ std::vector<long long>&	jacobsthalNumbers(int len) {
 	return jnums;
 }
 
-long long	nthJacobsNum(int n) {
+template <typename ContCont, typename Cont>
+long long	PmergeMe<ContCont, Cont>::nthJacobsNum(int n) {
 	return ((1 << n + 1) + ((n & 1) ? -1 : 1)) / 3;
 }
+//---------------------------------------------------------------
 
-std::vector<int>&	PmergeMe::argToVec(int ac, char** av) {
-	std::vector<int>		input;
-	std::from_chars_result	res;
-	int		value;
 
-	for (size_t i = 0; av[i] != nullptr; ++i) {
-		res = std::from_chars(&av[i][0], &av[i][-1], value);	//find a better approach than -1 for back pointer
+//PARSER--------------------------------------------------------------------
+template <typename ContCont, typename Cont>
+Cont&	PmergeMe<ContCont, Cont>::argToCont(int ac, char** av) {
+	Cont			input;
+	int				value{};
+	std::size_t		back;
+
+	for (std::size_t i = 0; av[i] != nullptr; ++i) {
+		back = std::strlen(av[i]) - 1;
+		auto [ptr, ec] = std::from_chars(&av[i][0], back, value);
+		if (*ptr != '\0')
+			throw std::invalid_argument("Error: invalid char after number.\n");
+		if (ec == std::errc::invalid_argument)
+			throw std::invalid_argument("Error: non-number argument.\n");
+		if (ec == std::errc::result_out_of_range)
+			throw std::invalid_argument("Error: number larger than an int.\n");
+		if (ec != std::errc())
+			throw std::invalid_argument("Error!");
+		input.push_back(value);
 	}
 	return input;
 }
-
-std::deque<int>&	PmergeMe::argToDeq(int ac, char** av) {
-	std::deque<int>			input;
-	std::from_chars_result	res;
-	int		value;
-
-	for (size_t i = 0; av[i] != nullptr; ++i) {
-		res = std::from_chars(&av[i][0], &av[i][-1], value);	//find a better approach than -1 for back pointer
-	}
-	return input;
-}
+//---------------------------------------------------------------------------
 
 //(https://vivekupadhyay125.wordpress.com/wp-content/uploads/2013/08/donald-e-knuth-the-art-of-computer-programming-vol-3.pdf)
 //page 184
-void	PmergeMe::vectorFordJohnson() {
+template <typename ContCont, typename Cont>
+void	PmergeMe<ContCont, Cont>::FordJohnson() {
 	// FordJohnson from the book!
 	// BUT THE BOOK HAD AN EXAMPLE SEQUENCE OF 21 INTEGERS ONLY.
 	//	1: split the sequence into pairs
@@ -76,10 +103,6 @@ void	PmergeMe::vectorFordJohnson() {
 	//		(binary sort into a main-chain of 10 elements)
 	//	6: Insert in descending order the rest of the b's,
 	//		starting from the mate of the biggest a!
-	;
-}
-
-void	PmergeMe::dequeFordJohnson() {
 	;
 }
 

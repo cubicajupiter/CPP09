@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 14:34:17 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/04/29 16:24:10 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/04/30 15:40:18 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,19 @@ std::chrono
 int	main(int ac, char** av) {
 	if (ac > 1) {
 		{
-			std::vector<int>	input_sequence;
+			PmergeMe<std::vector<std::vector<int>>, std::vector<int>>		sorter;
 			
 			try {
-				input_sequence = PmergeMe::argToVec(ac, av);
+				sorter.argToCont(ac, av);
 			} catch (std::exception& e) {
 				std::cout << e.what();
 				return 1;
 			}
 		
-			const auto	start = std::chrono::steady_clock::now();
-			PmergeMe::vectorFordJohnson(input_sequence);
-			const auto	end = std::chrono::steady_clock::now();
-			const auto	duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+			const auto	start = std::chrono::steady_clock::now(); //put chronos into Time inside sorter methods.
+			sorter.FordJohnson();
+			const auto	end = std::chrono::steady_clock::now(); //put chrono end into Time destructor inside sorter methods.
+			const auto	duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start); //put chronos into Time class
 
 			//std::cout << duration << "\n";	//printworks here
 		}

@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 14:34:14 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/04/29 16:24:12 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/04/30 15:40:16 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,29 @@
 std::vector<long long>&	jacobsthalNumbers(int n);
 long long	nthJacobsNum(int n);
 
+
+template <typename ContCont, typename Cont>
 class PmergeMe {
-	private:
-		PmergeMe() = delete;
-		PmergeMe() = delete;
-		~PmergeMe() = delete;
-		PmergeMe&	operator=(const PmergeMe& other) = delete;
 	public:
-		void				vectorFordJohnson();
-		void				dequeFordJohnson();
-		std::vector<int>&	argToVec(int ac, char** av);
-		std::deque<int>&	argToDeq(int ac, char** av);
+		PmergeMe();
+		PmergeMe(char** argv);
+		PmergeMe(const PmergeMe& other);
+		~PmergeMe();
+		PmergeMe&	operator=(const PmergeMe& other);
+
+		void	FordJohnson();
+
+		Cont&	argToCont(int ac, char** av);
+
+		//Jacobsthal numbers
+		long long	nthJacobsNum(int n);
+		std::vector<long long>&	jacobsthalNumbers(int len);
+
+		class Timer {
+			public:
+				Timer();
+				Timer(const Timer& other);
+				~Timer();
+				Timer&	operator=(const Timer& other);
+		};
 };
